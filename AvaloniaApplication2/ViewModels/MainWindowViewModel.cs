@@ -11,25 +11,22 @@ namespace AvaloniaApplication2.ViewModels
 	public class MainWindowViewModel : ViewModelBase
 	{
 		public DataGridCollectionView CollectionView { get; }
-		private readonly List<GridEntry> SOURCE = new();
-
-		public string Greeting => "Welcome to Avalonia!";
+		private readonly AvaloniaList<GridEntry> SOURCE = new();
 
 		public MainWindowViewModel()
 		{
 			CollectionView = new DataGridCollectionView(SOURCE);
 
-			for (int i = 0; i < 20; i++)
-				SOURCE.Add(new GridEntry { ItemName = i.ToString(), Remove = true });
+			SOURCE.Add(new GridEntry());
+			SOURCE.Add(new GridEntry { ItemName = "Some Text" });
 
 			CollectionView.GroupDescriptions.Add(new GroupDescription());
 		}
 	}
-
 	
 	public class GridEntry : ViewModelBase
 	{
-		public string? ItemName { get; init; }
+		public string? ItemName { get; set; }
 		private bool? remove;
 		public bool? Remove { get => remove; set => this.RaiseAndSetIfChanged(ref remove, value); }
 	}
